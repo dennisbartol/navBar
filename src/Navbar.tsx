@@ -1,6 +1,7 @@
 import "./Navbar.css"
 import { useEffect, useRef, useState } 
 	from "react"; 
+
 export const Navbar = () => {
   const lastScrollTop = useRef(0); 
   const [ isNavbarVisible, setIsNavBarVisible] = 
@@ -8,11 +9,19 @@ export const Navbar = () => {
 
 // handlescroll - Offset code 
 
-
+  const handleScroll = () => {
+    const { pageYOffset } = window; 
+    if (
+	pageYOffset > lastScrollTop.current 
+    ) {	
+	setIsNavbarVisible(false);
+    } 
+    else if (pageYOffset < lastScrollTop.current
+    ) { 
+	setIsNavbarVisible(true); 
+    }	
+    lastScrollTop.current = pageYOffset; 	    
 }
-
-
-
 
 
 useEffect(() => {
